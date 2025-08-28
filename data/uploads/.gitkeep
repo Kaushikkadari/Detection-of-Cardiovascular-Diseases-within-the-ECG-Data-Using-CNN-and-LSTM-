@@ -1,0 +1,2 @@
+# This file ensures the uploads directory is preserved in Git
+# while its contents are ignored via .gitignore

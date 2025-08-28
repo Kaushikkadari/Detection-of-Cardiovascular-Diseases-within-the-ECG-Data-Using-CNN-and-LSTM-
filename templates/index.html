@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}CardioDetect - ECG Analysis for Cardiovascular Disease{% endblock %}
+
+{% block content %}
+<div class="row align-items-center hero-section py-5" style="background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%); border-radius: 15px; margin: 0 5px 20px 5px; box-shadow: 0 4px 15px rgba(67, 97, 238, 0.15);">
+    <div class="col-lg-6 p-4 p-lg-5">
+        <div class="accent-border mb-4">
+            <h1 class="display-4 fw-bold text-gradient">Advanced Cardiovascular Disease Detection</h1>
+        </div>
+        <p class="lead my-4 text-secondary">
+            Our AI-powered platform uses deep learning with CNN and LSTM neural networks to analyze ECG data and detect patterns associated with cardiovascular diseases.
+        </p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="{{ url_for('upload_file') }}" class="btn btn-primary btn-lg px-4 me-md-2 shadow-sm" style="border-radius: 30px; transition: all 0.3s ease;">
+                <i class="fas fa-heartbeat me-2"></i>Analyze ECG
+            </a>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary btn-lg px-4 dropdown-toggle shadow-sm" type="button" id="demoDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 30px; transition: all 0.3s ease;">
+                    <i class="fas fa-vial me-2"></i>Try Demo
+                </button>
+                <ul class="dropdown-menu shadow" aria-labelledby="demoDropdown">
+                    <li><a class="dropdown-item" href="{{ url_for('demo', type='signal') }}">Signal Demo</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('demo', type='image') }}">Image Demo</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-5 mt-lg-0 text-center p-4">
+        <div class="position-relative" style="animation: pulse 2s infinite alternate ease-in-out;">
+            <img src="{{ url_for('static', filename='img/Heart.png') }}" alt="Heart Illustration" class="img-fluid rounded shadow" style="max-height: 400px; transition: transform 0.3s ease;">
+        </div>
+        <!-- <img src="{{ url_for('static', filename='img/ecg_heart.svg') }}" alt="ECG Heart Illustration" class="img-fluid mb-3" style="max-height: 200px;"> -->
+        <!-- <img src="{{ url_for('static', filename='img/synthetic_ecg.png') }}" alt="ECG Signal Example" class="img-fluid" style="max-height: 200px;"> -->
+    </div>
+</div>
+
+<hr class="my-5" style="height: 2px; background: linear-gradient(to right, transparent, var(--primary-color), transparent);">
+
+<div class="row g-4 py-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="icon-circle mb-3">
+                    <i class="fas fa-brain text-primary fa-3x"></i>
+                </div>
+                <h3 class="card-title text-gradient">Deep Learning</h3>
+                <p class="card-text text-secondary">Our system combines Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) networks to extract complex patterns from ECG signals.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="icon-circle mb-3">
+                    <i class="fas fa-chart-line text-primary fa-3x"></i>
+                </div>
+                <h3 class="card-title text-gradient">High Accuracy</h3>
+                <p class="card-text text-secondary">Trained on thousands of ECG samples, our model achieves high sensitivity and specificity in detecting cardiovascular abnormalities.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+            <div class="card-body text-center p-4">
+                <div class="icon-circle mb-3">
+                    <i class="fas fa-user-md text-primary fa-3x"></i>
+                </div>
+                <h3 class="card-title text-gradient">Clinical Support</h3>
+                <p class="card-text text-secondary">Designed as a supportive tool for healthcare professionals to assist in early detection and diagnosis of heart conditions.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card bg-light shadow-sm">
+            <div class="card-header bg-gradient-primary">
+                <h2 class="text-center mb-0 text-white">How It Works</h2>
+            </div>
+            <div class="card-body p-4">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="step-circle mb-3">
+                                <span class="fs-4">1</span>
+                            </div>
+                            <h5 class="text-primary">Upload ECG</h5>
+                            <p class="text-secondary">Upload your ECG data in various formats (JPG, PNG)</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="step-circle mb-3">
+                                <span class="fs-4">2</span>
+                            </div>
+                            <h5 class="text-primary">Preprocessing</h5>
+                            <p class="text-secondary">Signal is normalized and prepared for analysis</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="step-circle mb-3">
+                                <span class="fs-4">3</span>
+                            </div>
+                            <h5 class="text-primary">AI Analysis</h5>
+                            <p class="text-secondary">CNN-LSTM model extracts features and patterns</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <div class="step-circle mb-3">
+                                <span class="fs-4">4</span>
+                            </div>
+                            <h5 class="text-primary">Results</h5>
+                            <p class="text-secondary">Get detailed analysis with confidence score</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-gradient-primary text-white">
+                <h3 class="h5 mb-0">Supported Input Formats</h3>
+            </div>
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="accent-border mb-3">
+                            <h4 class="h6 text-primary">Signal Data</h4>
+                        </div>
+                        <ul class="text-secondary">
+                            <li>CSV files with raw ECG values</li>
+                            <li>TXT files with space or comma-separated values</li>
+                            <li>NPY files (NumPy arrays)</li>
+                            <li>PhysioNet formats (DAT, HEA)</li>
+                            <li>MATLAB files (MAT)</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="accent-border mb-3">
+                            <h4 class="h6 text-primary">Image Data</h4>
+                        </div>
+                        <ul class="text-secondary">
+                            <li>JPG/JPEG images of ECG traces</li>
+                            <li>PNG images of ECG recordings</li>
+                            <li>Images from ECG printouts or screenshots</li>
+                            <li>ECG images from medical devices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,311 @@
+/* CardioDetect - ECG Cardiovascular Disease Detection
+   Main Stylesheet */
+
+/* Custom Variables */
+:root {
+    --primary-color: #4f46e5;
+    --primary-dark: #4338ca;
+    --primary-light: #eef2ff;
+    --secondary-color: #3f3d56;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #06b6d4;
+    --light-color: #f8fafc;
+    --dark-color: #1e293b;
+    --body-bg: #f8fafc;
+    --card-shadow: 0 0.5rem 1rem rgba(79, 70, 229, 0.1);
+    --accent-color: #f43f5e;
+    --accent-light: #fff1f2;
+    --gradient-start: #4f46e5;
+    --gradient-end: #06b6d4;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --hover-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
+    --gradient-secondary: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+}
+
+/* Base Styles */
+body {
+    background-color: var(--body-bg);
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    padding-bottom: 60px;
+    color: var(--text-primary);
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    padding: 10;
+}
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+/* Card Enhancements */
+.card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card.shadow {
+    box-shadow: var(--card-shadow);
+}
+
+.card.shadow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.18);
+}
+
+.card-header {
+    border-bottom: 0;
+    padding: 1rem 1.25rem;
+}
+
+/* Hero Section */
+.hero-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eef2ff 0%, #ffffff 100%);
+}
+
+/* ECG Plot Styling */
+.ecg-plot-container {
+    background-color: #fff;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.ecg-plot-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Diagnosis Card */
+.diagnosis-card {
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.diagnosis-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Buttons */
+.btn {
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--info-color) 100%);
+    border: none;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
+}
+
+.btn-outline-secondary {
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    background: transparent;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--gradient-secondary);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(244, 63, 94, 0.2);
+}
+
+/* Form Styling */
+.form-control, .form-select {
+    border-radius: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Progress Bar */
+.progress {
+    height: 0.5rem;
+    border-radius: 1rem;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 1rem;
+    transition: width 0.6s ease;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: auto;
+        padding: 2rem 0;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Animation for loading states */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 100%;
+        width: 100%;
+    }
+    
+    .card {
+        border: none;
+        box-shadow: none;
+    }
+    
+    .navbar, .footer, .btn, .card-footer {
+        display: none !important;
+    }
+}
+
+/* Enhanced Card Styles */
+.hover-card {
+    transition: all 0.3s ease;
+    border: none;
+    background-color: var(--card-bg);
+}
+
+.hover-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--hover-shadow) !important;
+}
+
+/* Icon Circle */
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    transition: all 0.3s ease;
+}
+
+.hover-card:hover .icon-circle {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+    transform: scale(1.1);
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Image Hover Effects */
+.hero-section img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Gradient Divider */
+hr.gradient {
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    border: none;
+    margin: 2rem 0;
+}
+
+/* Gradient Styles */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: white;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* How It Works Section */
+.step-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.2);
+}
+
+/* Accent Elements */
+.accent-border {
+    border-left: 4px solid;
+    border-image: var(--gradient-secondary);
+    border-image-slice: 1;
+    padding-left: 15px;
+}
+
+.accent-bg {
+    background-color: var(--accent-light);
+} 

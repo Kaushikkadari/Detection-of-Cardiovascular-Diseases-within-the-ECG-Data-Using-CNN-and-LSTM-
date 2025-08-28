@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}Model Training - CardioDetect{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0"><i class="fas fa-brain me-2"></i>Model Training and Management</h2>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>Administrator Access:</strong> This section is intended for system administrators and data scientists. Training a model requires significant computational resources and properly labeled ECG data.
+                </div>
+                
+                <ul class="nav nav-tabs" id="modelTabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="train-tab" data-bs-toggle="tab" data-bs-target="#train" type="button" role="tab">Train New Model</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="upload-tab" data-bs-toggle="tab" data-bs-target="#upload" type="button" role="tab">Upload Pre-trained Model</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="manage-tab" data-bs-toggle="tab" data-bs-target="#manage" type="button" role="tab">Manage Models</button>
+                    </li>
+                </ul>
+                
+                <div class="tab-content p-3 border border-top-0 rounded-bottom" id="modelTabsContent">
+                    <!-- Train New Model Tab -->
+                    <div class="tab-pane fade show active" id="train" role="tabpanel" aria-labelledby="train-tab">
+                        <h3 class="h5 mb-3">Train CNN-LSTM Model</h3>
+                        <form method="post" action="{{ url_for('train_model') }}" enctype="multipart/form-data">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="training_data" class="form-label">Training Dataset</label>
+                                        <input type="file" class="form-control" id="training_data" name="training_data" required>
+                                        <div class="form-text">Upload a ZIP file containing labeled ECG data</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="validation_data" class="form-label">Validation Dataset (Optional)</label>
+                                        <input type="file" class="form-control" id="validation_data" name="validation_data">
+                                        <div class="form-text">If not provided, a portion of training data will be used</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="epochs" class="form-label">Training Epochs</label>
+                                        <input type="number" class="form-control" id="epochs" name="epochs" value="50" min="1" max="200">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="batch_size" class="form-label">Batch Size</label>
+                                        <select class="form-select" id="batch_size" name="batch_size">
+                                            <option value="16">16</option>
+                                            <option value="32" selected>32</option>
+                                            <option value="64">64</option>
+                                            <option value="128">128</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="card mb-3">
+                                        <div class="card-header bg-light py-2">
+                                            <h5 class="card-title h6 mb-0">Model Architecture</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row g-3">
+                                                <div class="col-md-4">
+                                                    <label for="cnn_layers" class="form-label">CNN Layers</label>
+                                                    <input type="number" class="form-control" id="cnn_layers" name="cnn_layers" value="3" min="1" max="5">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="lstm_layers" class="form-label">LSTM Layers</label>
+                                                    <input type="number" class="form-control" id="lstm_layers" name="lstm_layers" value="2" min="1" max="3">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="dense_layers" class="form-label">Dense Layers</label>
+                                                    <input type="number" class="form-control" id="dense_layers" name="dense_layers" value="2" min="1" max="3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="data_augmentation" name="data_augmentation" checked>
+                                        <label class="form-check-label" for="data_augmentation">
+                                            Enable Data Augmentation
+                                        </label>
+                                        <div class="form-text">Apply random transformations to increase training data diversity</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-play-circle me-2"></i>Start Training
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Upload Pre-trained Model Tab -->
+                    <div class="tab-pane fade" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+                        <h3 class="h5 mb-3">Upload Pre-trained Model</h3>
+                        <form method="post" action="{{ url_for('train_model') }}" enctype="multipart/form-data">
+                            <input type="hidden" name="action" value="upload">
+                            
+                            <div class="mb-3">
+                                <label for="model_file" class="form-label">Model File (.h5)</label>
+                                <input type="file" class="form-control" id="model_file" name="model_file" required>
+                                <div class="form-text">Upload a pre-trained Keras/TensorFlow model file</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="scaler_file" class="form-label">Scaler File (Optional)</label>
+                                <input type="file" class="form-control" id="scaler_file" name="scaler_file">
+                                <div class="form-text">Upload the corresponding scaler file (pickle format)</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="model_name" class="form-label">Model Name</label>
+                                <input type="text" class="form-control" id="model_name" name="model_name" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="model_description" class="form-label">Description</label>
+                                <textarea class="form-control" id="model_description" name="model_description" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-upload me-2"></i>Upload Model
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Manage Models Tab -->
+                    <div class="tab-pane fade" id="manage" role="tabpanel" aria-labelledby="manage-tab">
+                        <h3 class="h5 mb-3">Manage Existing Models</h3>
+                        
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Model Name</th>
+                                        <th>Type</th>
+                                        <th>Created</th>
+                                        <th>Performance</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>cnn_lstm_model.h5</td>
+                                        <td><span class="badge bg-info">CNN-LSTM</span></td>
+                                        <td>2023-09-15</td>
+                                        <td>94.2% Acc</td>
+                                        <td><span class="badge bg-success">Active</span></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary">Download</button>
+                                                <button class="btn btn-outline-danger">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>cnn_only_model.h5</td>
+                                        <td><span class="badge bg-secondary">CNN</span></td>
+                                        <td>2023-08-20</td>
+                                        <td>91.5% Acc</td>
+                                        <td><span class="badge bg-secondary">Inactive</span></td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm">
+                                                <button class="btn btn-outline-primary">Download</button>
+                                                <button class="btn btn-outline-success">Activate</button>
+                                                <button class="btn btn-outline-danger">Delete</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Note:</strong> Only one model can be active at a time. The active model will be used for all ECG analyses.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

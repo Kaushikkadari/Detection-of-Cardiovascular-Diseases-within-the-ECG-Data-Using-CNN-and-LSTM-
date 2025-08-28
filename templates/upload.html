@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}Upload ECG Data - CardioDetect{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="h4 mb-0"><i class="fas fa-file-upload me-2"></i>Upload ECG Data</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                    <div class="mb-4">
+                        <label for="file" class="form-label">Select ECG File</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                        <div class="form-text">
+                            Supported formats: JPG, JPEG, PNG
+                        </div>
+                        <div class="invalid-feedback">
+                            Please select a valid ECG file.
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-upload me-2"></i>Upload and Analyze
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4 shadow">
+            <div class="card-header bg-light">
+                <h3 class="h5 mb-0">File Format Guidelines</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <h4 class="h6">CSV Format</h4>
+                        <ul class="small">
+                            <li>Single column: Raw ECG values</li>
+                            <li>Multiple columns: Each column represents a lead</li>
+                            <li>No header row preferred</li>
+                        </ul>
+                        
+                        <h4 class="h6 mt-3">TXT Format</h4>
+                        <ul class="small">
+                            <li>Space or comma-separated values</li>
+                            <li>One sample per line</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 class="h6">NPY Format</h4>
+                        <ul class="small">
+                            <li>NumPy array file</li>
+                            <li>Shape: (samples, [leads])</li>
+                        </ul> -->
+                        
+                        <h4 class="h6 mt-3">Image Formats (JPG, PNG)</h4>
+                        <ul class="small">
+                            <li>Clear ECG trace on contrasting background</li>
+                            <li>Single lead ECG preferred</li>
+                            <li>Good resolution for accurate trace extraction</li>
+                        </ul>
+                        
+                        <h4 class="h6 mt-3">Other Formats</h4>
+                        <ul class="small">
+                            <li>PhysioNet formats (DAT, HEA)</li>
+                            <li>MATLAB files (MAT)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3 mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <strong>Tip:</strong> For best results, use ECG recordings with at least 10 seconds of data at a sampling rate of 100-500 Hz. When uploading images, ensure the ECG trace is clearly visible against the background.
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <p>Don't have an ECG file?</p>
+            <div class="btn-group">
+                <a href="{{ url_for('demo', type='signal') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-wave-square me-2"></i>Try with Signal Demo
+                </a>
+                <a href="{{ url_for('demo', type='image') }}" class="btn btn-outline-primary">
+                    <i class="fas fa-image me-2"></i>Try with Image Demo
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form validation
+    (function() {
+        'use strict';
+        
+        const forms = document.querySelectorAll('.needs-validation');
+        
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+{% endblock %} 

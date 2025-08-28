@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="800" height="600" fill="#f8f9fa"/>
+    
+    <!-- Title -->
+    <text x="400" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#2c3e50">CardioDetect System Architecture</text>
+    
+    <!-- Frontend Layer -->
+    <g transform="translate(50,80)">
+        <rect width="200" height="100" rx="10" fill="#3498db" opacity="0.9"/>
+        <text x="100" y="45" text-anchor="middle" fill="white" font-size="16">Frontend</text>
+        <text x="100" y="65" text-anchor="middle" fill="white" font-size="12">(HTML/CSS/JS)</text>
+    </g>
+    
+    <!-- Backend Layer -->
+    <g transform="translate(300,80)">
+        <rect width="200" height="100" rx="10" fill="#2ecc71" opacity="0.9"/>
+        <text x="100" y="45" text-anchor="middle" fill="white" font-size="16">Backend</text>
+        <text x="100" y="65" text-anchor="middle" fill="white" font-size="12">(Flask)</text>
+    </g>
+    
+    <!-- Database Layer -->
+    <g transform="translate(550,80)">
+        <rect width="200" height="100" rx="10" fill="#e74c3c" opacity="0.9"/>
+        <text x="100" y="45" text-anchor="middle" fill="white" font-size="16">Database</text>
+        <text x="100" y="65" text-anchor="middle" fill="white" font-size="12">(SQLite)</text>
+    </g>
+    
+    <!-- Model Layer -->
+    <g transform="translate(50,250)">
+        <rect width="700" height="150" rx="10" fill="#9b59b6" opacity="0.9"/>
+        <text x="350" y="45" text-anchor="middle" fill="white" font-size="16">AI Model</text>
+        <text x="350" y="65" text-anchor="middle" fill="white" font-size="12">(CNN-LSTM Hybrid)</text>
+        
+        <!-- Model Components -->
+        <g transform="translate(50,90)">
+            <rect width="150" height="60" rx="5" fill="#8e44ad"/>
+            <text x="75" y="35" text-anchor="middle" fill="white" font-size="12">CNN Layers</text>
+        </g>
+        
+        <g transform="translate(250,90)">
+            <rect width="150" height="60" rx="5" fill="#8e44ad"/>
+            <text x="75" y="35" text-anchor="middle" fill="white" font-size="12">LSTM Layers</text>
+        </g>
+        
+        <g transform="translate(450,90)">
+            <rect width="150" height="60" rx="5" fill="#8e44ad"/>
+            <text x="75" y="35" text-anchor="middle" fill="white" font-size="12">Dense Layers</text>
+        </g>
+    </g>
+    
+    <!-- Data Processing Layer -->
+    <g transform="translate(50,450)">
+        <rect width="700" height="100" rx="10" fill="#f1c40f" opacity="0.9"/>
+        <text x="350" y="35" text-anchor="middle" fill="#2c3e50" font-size="16">Data Processing Pipeline</text>
+        
+        <!-- Processing Steps -->
+        <g transform="translate(50,50)">
+            <rect width="120" height="30" rx="5" fill="#f39c12"/>
+            <text x="60" y="20" text-anchor="middle" fill="white" font-size="10">Preprocessing</text>
+        </g>
+        
+        <g transform="translate(200,50)">
+            <rect width="120" height="30" rx="5" fill="#f39c12"/>
+            <text x="60" y="20" text-anchor="middle" fill="white" font-size="10">Feature Extraction</text>
+        </g>
+        
+        <g transform="translate(350,50)">
+            <rect width="120" height="30" rx="5" fill="#f39c12"/>
+            <text x="60" y="20" text-anchor="middle" fill="white" font-size="10">Model Inference</text>
+        </g>
+        
+        <g transform="translate(500,50)">
+            <rect width="120" height="30" rx="5" fill="#f39c12"/>
+            <text x="60" y="20" text-anchor="middle" fill="white" font-size="10">Post-processing</text>
+        </g>
+    </g>
+    
+    <!-- Connections -->
+    <g stroke="#2c3e50" stroke-width="2" fill="none">
+        <!-- Frontend to Backend -->
+        <path d="M250,130 L300,130"/>
+        
+        <!-- Backend to Database -->
+        <path d="M500,130 L550,130"/>
+        
+        <!-- Backend to Model -->
+        <path d="M400,180 L400,250"/>
+        
+        <!-- Model to Data Processing -->
+        <path d="M400,400 L400,450"/>
+    </g>
+    
+    <!-- Arrows -->
+    <g fill="#2c3e50">
+        <path d="M290,130 L300,120 L310,130 L300,140 Z"/>
+        <path d="M540,130 L550,120 L560,130 L550,140 Z"/>
+        <path d="M390,240 L400,230 L410,240 L400,250 Z"/>
+        <path d="M390,450 L400,440 L410,450 L400,460 Z"/>
+    </g>
+</svg> 

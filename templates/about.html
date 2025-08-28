@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}About - CardioDetect{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- <div class="card shadow-sm">
+                <div class="card-header bg-gradient-primary text-white">
+                    <h3 class="card-title mb-0">System Architecture</h3>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="{{ url_for('static', filename='img/architecture.svg') }}" alt="System Architecture" class="img-fluid rounded shadow-sm" style="max-width: 800px;">
+                    </div> -->
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Data Processing Pipeline</h5>
+                                    <p class="card-text">Our system processes ECG signals through a sophisticated pipeline that includes preprocessing, feature extraction, and post-processing steps to ensure accurate analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Model Architecture</h5>
+                                    <p class="card-text">The core of our system uses a hybrid CNN-LSTM architecture that combines the power of convolutional networks for feature extraction with LSTM layers for temporal pattern recognition.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title text-primary">Analysis & Interpretation</h5>
+                                    <p class="card-text">Results are processed through multiple layers of analysis to provide comprehensive insights into cardiovascular health status.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-5">
+                        <h4 class="text-primary mb-4">Key Components</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="fas fa-database text-primary me-2"></i>
+                                        Data Collection & Storage
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-microchip text-primary me-2"></i>
+                                        Feature Extraction Engine
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-brain text-primary me-2"></i>
+                                        Model Training Pipeline
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <i class="fas fa-chart-line text-primary me-2"></i>
+                                        Performance Monitoring
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-exclamation-triangle text-primary me-2"></i>
+                                        Error Analysis System
+                                    </li>
+                                    <li class="list-group-item">
+                                        <i class="fas fa-sync text-primary me-2"></i>
+                                        Continuous Learning Pipeline
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
